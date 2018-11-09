@@ -14,6 +14,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var CounterScream: UILabel!//主屏幕
     @IBOutlet weak var CounterScream2: UILabel!//待处理屏幕
     
+    func RemoveZero(testNumber:Double)->String{
+        var str = "\(testNumber)"
+        let str2 = str.components(separatedBy: ".")
+        if(Int(str2[1]) == 0)
+        {
+            str = str2[0]
+        }
+        return str
+    }
+    
     @IBAction func Numer(_ sender: UIButton) { //主屏幕输入
         if(CounterScream.text!.count <= 10)
         {
@@ -69,90 +79,68 @@ class ViewController: UIViewController {
     
     
     @IBAction func FinishCounter(_ sender: Any) {
-        if(CounterScream.text == "ERROR")
-        {
-            CounterScream.text = "0"
-        }
-        if(CounterScream2.text == "ERROR")
-        {
-            CounterScream2.text = "0"
-        }
         if((CounterScream.text != "") && (CounterScream2.text != ""))
         {
         switch CounterScream1.text{
             case "+":
-                CounterScream.text = String(format: "%f", Double(CounterScream2.text!)! + Double(CounterScream.text!)!)
+                CounterScream.text = RemoveZero(testNumber:( Double(CounterScream2.text!)! + Double(CounterScream.text!)!))
                 CounterScream1.text = "="
+                CounterScream2.text = ""
+                screamtext = "0"
                 break
             case "-":
-                CounterScream.text = String(format: "%f", Double(CounterScream2.text!)! - Double(CounterScream.text!)!)
+                CounterScream.text = RemoveZero(testNumber:( Double(CounterScream2.text!)! - Double(CounterScream.text!)!))
                 CounterScream1.text = "="
+                CounterScream2.text = ""
+                screamtext = "0"
                 break
             case "x":
-                CounterScream.text = String(format: "%f", Double(CounterScream2.text!)! * Double(CounterScream.text!)!)
+                CounterScream.text = RemoveZero(testNumber:( Double(CounterScream2.text!)! * Double(CounterScream.text!)!))
                 CounterScream1.text = "="
+                CounterScream2.text = ""
+                screamtext = "0"
                 break
             case "÷":
-                if(CounterScream.text != "0" && CounterScream2.text != "")
+                if(Int(CounterScream.text!) != 0)
                 {
-                    CounterScream.text = String(format: "%f", Double(CounterScream2.text!)! / Double(CounterScream.text!)!)
+                    CounterScream.text = RemoveZero(testNumber:( Double(CounterScream2.text!)! / Double(CounterScream.text!)!))
                     CounterScream1.text = "="
-                }
-                else
-                {
-                    CounterScream2.text = "0"
-                    CounterScream.text  = "ERROR"
-                    CounterScream1.text = ""
+                    CounterScream2.text = ""
+                    screamtext = "0"
                 }
                 break
             default:
                 CounterScream.text = "ERROR"
                 break
         }
-        CounterScream2.text = ""
-        screamtext = "0"
         }
     }
     
     @IBAction func CountComb(_ sender: Any) {
-        if(CounterScream2.text == "ERROR")
-        {
-            CounterScream2.text = "0"
-        }
-        if(CounterScream.text == "ERROR")
-        {
-            CounterScream.text = "0"
-        }
         if((CounterScream.text != "") && (CounterScream2.text != ""))
         {
             switch CounterScream1.text{
             case "+":
-                CounterScream2.text = String(format: "%f", Double(CounterScream2.text!)! + Double(CounterScream.text!)!)
+                CounterScream2.text = RemoveZero(testNumber:( Double(CounterScream2.text!)! + Double(CounterScream.text!)!))
                 CounterScream.text = "0"
                 screamtext = ""
                 break
             case "-":
-                CounterScream2.text = String(format: "%f", Double(CounterScream2.text!)! - Double(CounterScream.text!)!)
+                CounterScream2.text = RemoveZero(testNumber:( Double(CounterScream2.text!)! - Double(CounterScream.text!)!))
                 CounterScream.text = "0"
                 screamtext = ""
                 break
             case "x":
-                CounterScream2.text = String(format: "%f", Double(CounterScream2.text!)! * Double(CounterScream.text!)!)
+                CounterScream2.text = RemoveZero(testNumber:( Double(CounterScream2.text!)! * Double(CounterScream.text!)!))
                 CounterScream.text = "0"
                 screamtext = ""
                 break
             case "÷":
-                if(CounterScream.text != "0" && CounterScream2.text != " ")
+                if(Int(CounterScream.text!) != 0)
                 {
-                    CounterScream2.text = String(format: "%f", Double(CounterScream2.text!)! / Double(CounterScream.text!)!)
+                    CounterScream2.text = RemoveZero(testNumber:( Double(CounterScream2.text!)! / Double(CounterScream.text!)!))
                     CounterScream.text = "0"
                     screamtext = ""
-                }
-                else
-                {
-                    CounterScream.text = CounterScream2.text
-                    CounterScream2.text = "ERROR"
-                    CounterScream1.text = ""
                 }
             default:
                 CounterScream.text = "ERROR"
