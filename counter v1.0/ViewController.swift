@@ -45,6 +45,7 @@ class ViewController: UIViewController {
                 screamtext = "0"
             }
             CounterScream.text = screamtext;    //主屏幕输入
+            print(CounterScream.text!.contains("1"))
         }
     }
     
